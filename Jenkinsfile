@@ -4,17 +4,13 @@ node {
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
 
-        git url:'https://github.com/gsoncloud/smokies.git'
+        git url:'https://github.com/gsoncloud/Blog_client.git'
     }
 
     stage('SonarQube analysis') {
         withSonarQubeEnv('localhost') {
             sh 'mvn -B -DskipTests clean package sonar:sonar'
         } // submitted SonarQube taskId is automatically attached to the pipeline context
-    }
-    
-     stage('Test') {
-         sh 'mvn test'
     }
     
     stage('Build') { 
@@ -29,7 +25,7 @@ node {
     }
 
     stage('Push image') {
-        sh "gcloud builds submit --tag gcr.io/devops-certification-lab/smokey-server:${env.BUILD_ID} ."
+        sh "gcloud builds submit --tag gcr.io/devops-certification-lab/smokey-client:${env.BUILD_ID} ."
     }
 
     stage('connect to k8s cluster'){
@@ -37,10 +33,10 @@ node {
     }
 
      stage('deploy') {
-        sh "kubectl apply -f server_dep.yaml"
+        sh "kubectl apply -f client_dep.yaml"
     }
 
     stage('service') {
-        sh "kubectl apply -f smokey_service.yaml"
+        sh "kubectl apply -f client_service.yaml"
     }
 }
