@@ -39,7 +39,7 @@ public class BlogController {
 		System.out.println("retrieving blogs");
 		ResponseEntity<Blog[]> responseEntity = restTemplate.getForEntity(blogServerURL, Blog[].class);
 		Blog[] blogs = responseEntity.getBody();
-		System.out.println("retrieving blogs " + blogs.length + " " + blogs[3].getBlogPost());
+		System.out.println("retrieving blogs " + blogs.length );
 //		model.addAllAttributes(restTemplate.getForObject("http://localhost:9090/blog", List.class));
 		model.addAttribute("blogs", blogs);
 		return "index";
