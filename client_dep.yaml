@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: smokey-client
+  name: smokey-client
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: smokey-client
+  template:
+    metadata:
+      labels:
+        run: smokey-client
+    spec:
+      containers:
+      - image: gcr.io/devops-certification-lab/smokey-client:BUILD
+        name: smokey-client
+        env:
+        - name: SERVER
+          value: "http://smokey-service:9090"
