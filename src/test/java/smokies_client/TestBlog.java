@@ -24,6 +24,7 @@ public class TestBlog {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--no-sandbox");
 		options.addArguments("--disable-dev-shm-usage");
+		options.addArguments("--headless");
 		if ((OS.indexOf("win") >= 0))
 			System.setProperty("webdriver.chrome.driver", "chromedriver78.exe");
 		else
