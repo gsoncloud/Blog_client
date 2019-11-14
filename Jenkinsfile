@@ -38,4 +38,7 @@ node {
     stage('service') {
         sh "kubectl apply -f client_service.yaml"
     }
+    stage('selenium') {
+        sh "mvn verify"
+    }
 }
