@@ -3,6 +3,7 @@ package smokies_client;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -22,11 +23,18 @@ public class TestBlog {
 	@BeforeTest
 	public void beforeTest() {
 		ChromeOptions options = new ChromeOptions();
+		 DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 		options.setExperimentalOption("useAutomationExtension", false);
 		options.setHeadless(true);
-		options.addArguments("--no-sandbox");
-		options.addArguments("--disable-dev-shm-usage");
-		options.addArguments("--headless");
+		options.addArguments("--no-sandbox"); // Bypass OS security model, MUST BE THE VERY FIRST OPTION
+        options.addArguments("--headless");
+        options.setExperimentalOption("useAutomationExtension", false);
+        options.addArguments("start-maximized"); // open Browser in maximized mode
+        options.addArguments("disable-infobars"); // disabling infobars
+        options.addArguments("--disable-extensions"); // disabling extensions
+        options.addArguments("--disable-gpu"); // applicable to windows os only
+        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+        options.merge(capabilities);
 		if ((OS.indexOf("win") >= 0))
 			System.setProperty("webdriver.chrome.driver", "chromedriver78.exe");
 		else
