@@ -29,7 +29,7 @@ public class TestBlog {
 		options.addArguments("--no-sandbox");
 		System.setProperty("webdriver.chrome.args", "--disable-logging");
 		System.setProperty("webdriver.chrome.silentOutput", "true");
-		options.setBinary("/pointing/downloaded/driver/path/in/automationsuite");
+		options.setBinary("/usr/bin/google-chrome-stable");
 		options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
 		options.addArguments("disable-infobars"); // disabling infobars
 		options.addArguments("--disable-extensions"); // disabling extensions
