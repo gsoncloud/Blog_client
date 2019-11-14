@@ -2,6 +2,7 @@ package smokies_client;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -20,11 +21,15 @@ public class TestBlog {
 
 	@BeforeTest
 	public void beforeTest() {
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--no-sandbox");
+		options.addArguments("--disable-dev-shm-usage");
 		if ((OS.indexOf("win") >= 0))
 			System.setProperty("webdriver.chrome.driver", "chromedriver78.exe");
 		else
 			System.setProperty("webdriver.chrome.driver", "chromedriver-linux");
-		driver = new ChromeDriver();
+		driver = new ChromeDriver(options);
+
 	}
 
 	@AfterTest
