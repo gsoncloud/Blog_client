@@ -23,6 +23,7 @@ public class TestBlog {
 	public void beforeTest() {
 		ChromeOptions options = new ChromeOptions();
 		options.setExperimentalOption("useAutomationExtension", false);
+		options.setHeadless(true);
 		options.addArguments("--no-sandbox");
 		options.addArguments("--disable-dev-shm-usage");
 		options.addArguments("--headless");
