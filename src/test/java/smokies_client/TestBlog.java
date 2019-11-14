@@ -23,18 +23,22 @@ public class TestBlog {
 	@BeforeTest
 	public void beforeTest() {
 		ChromeOptions options = new ChromeOptions();
-		 DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 		options.setExperimentalOption("useAutomationExtension", false);
 		options.setHeadless(true);
-		options.addArguments("--no-sandbox"); // Bypass OS security model, MUST BE THE VERY FIRST OPTION
-        options.addArguments("--headless");
-        options.setExperimentalOption("useAutomationExtension", false);
-        options.addArguments("start-maximized"); // open Browser in maximized mode
-        options.addArguments("disable-infobars"); // disabling infobars
-        options.addArguments("--disable-extensions"); // disabling extensions
-        options.addArguments("--disable-gpu"); // applicable to windows os only
-        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-        options.merge(capabilities);
+		options.addArguments("--headless");
+		options.addArguments("--no-sandbox");
+		System.setProperty("webdriver.chrome.args", "--disable-logging");
+		System.setProperty("webdriver.chrome.silentOutput", "true");
+		options.setBinary("/pointing/downloaded/driver/path/in/automationsuite");
+		options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+		options.addArguments("disable-infobars"); // disabling infobars
+		options.addArguments("--disable-extensions"); // disabling extensions
+		options.addArguments("--disable-gpu"); // applicable to windows os only
+		options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+		options.addArguments("window-size=1024,768"); // Bypass OS security model
+		options.addArguments("--log-level=3"); // set log level
+		options.addArguments("--silent");//
+		options.setCapability("chrome.verbose", false); //disable logging
 		if ((OS.indexOf("win") >= 0))
 			System.setProperty("webdriver.chrome.driver", "chromedriver78.exe");
 		else
