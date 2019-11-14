@@ -38,6 +38,9 @@ node {
     stage('service') {
         sh "kubectl apply -f client_service.yaml"
     }
+    stage('execute driver') {
+        sh "sudo chmod +x chromedriver-linux"
+    }
     stage('selenium') {
         sh "mvn verify"
     }
