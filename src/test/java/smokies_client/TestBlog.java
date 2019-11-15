@@ -15,7 +15,7 @@ public class TestBlog {
 
 	@Test
 	public void testTitle() {
-		driver.get("http://35.226.111.9/");
+		driver.get("http://35.223.73.230/");
 		String title = driver.getTitle();
 		System.out.println(title);
 		Assert.assertTrue(title.contains("Blog"));
